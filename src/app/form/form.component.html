@@ -1,0 +1,86 @@
+<div class="container">
+  <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+    <div class="form-group">
+      <label>Name</label>
+      <input
+        type="text"
+        class="form-control"
+        required
+        name="fullName"
+        placeholder="Email"
+        ngModel
+        #inputName="ngModel"
+        (change)="onChange(inputName)"
+        [ngClass]="{ 'in-valid': inputName.invalid && inputName.touched }"
+        minlength="5"
+      />
+      <div *ngIf="inputName.errors?.['required']">
+        <div
+          class="alert alert-danger"
+          *ngIf="inputName.invalid && inputName.touched"
+        >
+          Please enter your name
+        </div>
+      </div>
+      <div *ngIf="inputName.errors?.['minlength']">
+        <div
+          class="alert alert-danger"
+          *ngIf="inputName.invalid && inputName.touched"
+        >
+          Minimun length of 5 characters required
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Email</label>
+      <input
+        type="text"
+        class="form-control"
+        required
+        name="email"
+        placeholder="Email"
+        ngModel
+        #inputEmail="ngModel"
+        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+      />
+      <div *ngIf="inputEmail.errors?.['pattern']">
+        <div
+          class="alert alert-danger"
+          *ngIf="inputEmail.invalid && inputEmail.touched"
+        >
+          Invalid email
+        </div>
+      </div>
+      <div *ngIf="inputEmail.errors?.['required']">
+        <div
+          class="alert alert-danger"
+          *ngIf="inputEmail.invalid && inputEmail.touched"
+        >
+          please fill in the email address
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Name</label>
+      <textarea
+        cols="40"
+        rows="5"
+        class="form-control"
+        required
+        name="description"
+        placeholder="Description"
+        ngModel
+        #inputDescription="ngModel"
+      ></textarea>
+      <div *ngIf="inputDescription.errors?.['required']">
+        <div
+          class="alert alert-danger"
+          *ngIf="inputDescription.invalid && inputDescription.touched"
+        >
+          Invalid description field
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
