@@ -1,7 +1,37 @@
-<h1 class="text-center">template driven form</h1>
+<div class="m-xl-5">
+  <h1 class="text-center">Vehicles Parking Management</h1>
+  <p class="text-center text-muted">A vehicle parking control application</p>
+</div>
 
-<app-form></app-form>
-
-<h1 class="text-center">reactive form</h1>
-
-<app-form-reactive></app-form-reactive>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <app-register-form></app-register-form>
+    </div>
+    <div class="col">
+      <div class="pb-3">
+        <button
+          class="btn btn-sm btn-info mr-2"
+          (click)="staticsDisplayHandler()"
+        >
+          Register Info
+        </button>
+        <button class="btn btn-sm btn-info" (click)="registerDisplayHandler()">
+          Vehicles Statics
+        </button>
+      </div>
+      <app-vehicles-statics
+        *ngIf="isShowVehiclesStatics"
+      ></app-vehicles-statics>
+      <p
+        class="text-lg-center mt-lg-5"
+        *ngIf="isShowRegisterInfo && this.regList.length === 0"
+      >
+        THERE IS NO RECORD AT THE MOMENT
+      </p>
+      <app-register-info
+        *ngIf="isShowRegisterInfo && this.regList.length > 0"
+      ></app-register-info>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,44 @@
+<div>
+  <div>
+    <h4 class="border-bottom pb-1">REVENUE</h4>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Type</th>
+          <th scope="col">In</th>
+          <th scope="col">Out</th>
+          <th scope="col">Revenue</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>4 Seated</td>
+          <td>{{ dataStatics.fseated.in }}</td>
+          <td>{{ dataStatics.fseated.out }}</td>
+          <td>{{ dataStatics.fseated.revenue | currency }}</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>7 Seated</td>
+          <td>{{ dataStatics.sseated.in }}</td>
+          <td>{{ dataStatics.sseated.out }}</td>
+          <td>{{ dataStatics.sseated.revenue | currency }}</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td>Truck</td>
+          <td>{{ dataStatics.truck.in }}</td>
+          <td>{{ dataStatics.truck.out }}</td>
+          <td>{{ dataStatics.truck.revenue | currency }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="d-flex justify-content-end">
+    <button (click)="clearStaticsHandler()" class="btn btn-sm btn-dark">
+      Clear Statics
+    </button>
+  </div>
+</div>

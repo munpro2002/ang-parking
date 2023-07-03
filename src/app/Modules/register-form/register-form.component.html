@@ -1,0 +1,176 @@
+<div class="rounded px-3 py-4 border">
+  <form [formGroup]="regForm" (submit)="submitRegFormHandler(regForm)">
+    <div class="form-group">
+      <label> Car Owner </label>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Name"
+        formControlName="ownerName"
+        required
+        [ngClass]="{ 'is-invalid': ownerName.touched && ownerName.invalid }"
+      />
+      <div
+        class="alert alert-danger"
+        *ngIf="ownerName.touched && ownerName.invalid"
+      >
+        <div *ngIf="ownerName.errors?.['required']">
+          Please fill the owner name
+        </div>
+        <div *ngIf="ownerName.errors?.['pattern']">
+          Only accepted letter or space
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label> Liscense Plates </label>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Number"
+        formControlName="licensePlate"
+        required
+        [ngClass]="{
+          'is-invalid': licensePlate.touched && licensePlate.invalid
+        }"
+      />
+      <div
+        class="alert alert-danger"
+        *ngIf="licensePlate.touched && licensePlate.invalid"
+      >
+        <div *ngIf="licensePlate.errors?.['required']">
+          Please fill in the license-plate
+        </div>
+        <div *ngIf="licensePlate.errors?.['pattern']">
+          Only accepted number input
+        </div>
+        <div *ngIf="licensePlate.errors?.['noSpaceValidator']">
+          This field does not require space
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>
+        <span>Car Type</span>
+        <i
+          (click)="openPopup()"
+          class="bi bi-pencil-square text-dark ml-1"
+          style="cursor: pointer"
+        ></i
+      ></label>
+
+      <!-- Edit Vehicles Parking Fee -->
+      <div class="modal" [ngStyle]="{ display: displayEditFee }">
+        <div class="modal-dialog">
+          <form
+            class="modal-content"
+            [formGroup]="editFeeForm"
+            (submit)="submitEditFeeHandler(editFeeForm)"
+          >
+            <div class="modal-header">
+              <h4 class="modal-title">Edit Vehicles Parking Fee</h4>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <label>4 Seated</label>
+                <input
+                  class="form-control"
+                  placeholder="Enter a fee"
+                  type="number"
+                  formControlName="fseated"
+                  min="1"
+                />
+              </div>
+              <div class="form-group">
+                <label>7 Seated</label>
+                <input
+                  class="form-control"
+                  placeholder="Enter a fee"
+                  type="number"
+                  formControlName="sseated"
+                  min="1"
+                />
+              </div>
+              <div class="form-group">
+                <label>Truck</label>
+                <input
+                  class="form-control"
+                  placeholder="Enter a fee"
+                  type="number"
+                  formControlName="truck"
+                  min="1"
+                />
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="submit"
+                class="btn btn-primary"
+                [disabled]="editFeeForm.invalid"
+              >
+                Save
+              </button>
+              <button
+                type="button"
+                class="btn btn-danger"
+                (click)="closePopup()"
+              >
+                Close
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <select
+        formControlName="carType"
+        required
+        class="form-control"
+        [ngClass]="{ 'is-invalid': carType.touched && carType.invalid }"
+      >
+        <option hidden value="" disabled selected>
+          Please select vehicle type
+        </option>
+        <option [value]="0">
+          Type: 4 Seated, Fee: {{ feeService.fseated | currency }}/day
+        </option>
+        <option [value]="1">
+          Type: 7 Seated, Fee: {{ feeService.sseated | currency }}/day
+        </option>
+        <option [value]="2">
+          Type: Truck, Fee: {{ feeService.truck | currency }}/day
+        </option>
+      </select>
+      <div
+        class="alert alert-danger"
+        *ngIf="carType.touched && carType.invalid"
+      >
+        <div *ngIf="carType.errors?.['required']">
+          Please choose vehicles type
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Register Time</label>
+      <ejs-datetimepicker
+        [min]="todayTime"
+        formControlName="regDateTime"
+      ></ejs-datetimepicker>
+      <div
+        class="alert alert-danger"
+        *ngIf="regDateTime.touched && regDateTime.invalid"
+      >
+        <div *ngIf="regDateTime.errors?.['required']">
+          Please choose a valid date
+        </div>
+      </div>
+    </div>
+
+    <button [disabled]="regForm.invalid" type="submit" class="btn btn-primary">
+      Confirm
+    </button>
+  </form>
+</div>
