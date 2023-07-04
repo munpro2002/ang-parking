@@ -14,7 +14,7 @@ import {
 } from 'src/app/Modules/interfaces/vehiclesfee';
 import { Registerinfo } from 'src/app/Modules/interfaces/registerinfo';
 
-import { calculateFee } from '../../helpers/calculate-fee.helper';
+import { calculateFee } from '../helpers/calculate-fee.helper';
 
 @Component({
   selector: 'app-register-info',

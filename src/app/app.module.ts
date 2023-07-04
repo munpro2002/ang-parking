@@ -11,7 +11,7 @@ import { FilterPipe } from './Modules/pipes/filter.pipe';
 
 import { AppComponent } from './app.component';
 import { RegisterFormComponent } from './Modules/components/register-form/register-form.component';
-import { RegisterInfoComponent } from './Modules/components/vehicles-info/register-info/register-info.component';
+import { RegisterInfoComponent } from './Modules/components/register-info/register-info.component';
 import { VehiclesStaticsComponent } from './Modules/components/vehicles-statics/vehicles-statics.component';
 
 @NgModule({
