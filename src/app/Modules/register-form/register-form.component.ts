@@ -8,6 +8,13 @@ import { parkingRevenueService } from 'src/app/services/parking-revenue.service'
 import { FormBuilder, Validators } from '@angular/forms';
 import { noSpace } from '../validations/no-space.validator';
 
+import { Registerinfo } from '../interfaces/registerinfo';
+import { Vehiclesfee, vehiclesFeeBase } from '../interfaces/vehiclesfee';
+import {
+  Parkingrevenue,
+  parkingRevenueBaseValue,
+} from '../interfaces/parkingrevenue';
+
 @Component({
   selector: 'app-register-form',
   templateUrl: './register-form.component.html',
@@ -15,14 +22,17 @@ import { noSpace } from '../validations/no-space.validator';
 })
 export class RegisterFormComponent implements OnInit {
   todayTime = new Date();
+
   regForm: any;
   editFeeForm: any;
-  feeService: any;
+
   numRegex: string = '[0-9]+';
   letterRegex: string = '[a-zA-Z ]+';
   displayEditFee: string = 'none';
-  regList: Array<any> = [];
-  vehiclesStatics: any = {};
+
+  feeService: Vehiclesfee = vehiclesFeeBase;
+  regList: Array<Registerinfo> = [];
+  vehiclesStatics: Parkingrevenue = parkingRevenueBaseValue;
 
   constructor(
     fb: FormBuilder,
@@ -64,7 +74,6 @@ export class RegisterFormComponent implements OnInit {
     this.vehicleService.curVehiclesFee.subscribe(
       (fee) => (this.feeService = fee)
     );
-    console.log(this.feeService);
   }
 
   get ownerName() {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { registerVehiclesService } from './services/register-vehicles.service';
+import { Registerinfo } from './Modules/interfaces/registerinfo';
 
 @Component({
   selector: 'app-root',
@@ -9,14 +10,16 @@ import { registerVehiclesService } from './services/register-vehicles.service';
 export class AppComponent implements OnInit {
   isShowRegisterInfo: boolean = true;
   isShowVehiclesStatics: boolean = false;
-  regList: any;
+  regList: Array<Registerinfo> = [];
 
   constructor(private registerService: registerVehiclesService) {}
 
   ngOnInit() {
-    this.registerService.currRegisterInfo.subscribe((list: any) => {
-      this.regList = list;
-    });
+    this.registerService.currRegisterInfo.subscribe(
+      (list: Array<Registerinfo>) => {
+        this.regList = list;
+      }
+    );
   }
 
   staticsDisplayHandler() {

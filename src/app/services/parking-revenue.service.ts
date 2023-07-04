@@ -1,31 +1,20 @@
 import { BehaviorSubject } from 'rxjs';
 import { Injectable } from '@angular/core';
+import {
+  Parkingrevenue,
+  parkingRevenueBaseValue,
+} from '../Modules/interfaces/parkingrevenue';
 
 @Injectable()
 export class parkingRevenueService {
   private vehiclesStatics = new BehaviorSubject(
-    JSON.parse(localStorage.getItem('vehiclesStatics')!) || {
-      fseated: {
-        in: 0,
-        out: 0,
-        revenue: 0,
-      },
-      sseated: {
-        in: 0,
-        out: 0,
-        revenue: 0,
-      },
-      truck: {
-        in: 0,
-        out: 0,
-        revenue: 0,
-      },
-    }
+    JSON.parse(localStorage.getItem('vehiclesStatics')!) ||
+      parkingRevenueBaseValue
   );
 
   currVehicleStatics = this.vehiclesStatics.asObservable();
 
-  updateVehicleStatics(newStatics: Object) {
+  updateVehicleStatics(newStatics: Parkingrevenue) {
     this.vehiclesStatics.next(newStatics);
     localStorage.setItem('vehiclesStatics', JSON.stringify(newStatics));
   }

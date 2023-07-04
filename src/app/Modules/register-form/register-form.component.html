@@ -130,7 +130,7 @@
         class="form-control"
         [ngClass]="{ 'is-invalid': carType.touched && carType.invalid }"
       >
-        <option hidden value="" disabled selected>
+        <option defaultValue hidden value="" disabled selected>
           Please select vehicle type
         </option>
         <option [value]="0">

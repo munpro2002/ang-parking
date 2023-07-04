@@ -1,5 +1,6 @@
 import { BehaviorSubject } from 'rxjs';
 import { Injectable } from '@angular/core';
+import { Registerinfo } from '../Modules/interfaces/registerinfo';
 
 @Injectable()
 export class registerVehiclesService {
@@ -9,14 +10,7 @@ export class registerVehiclesService {
 
   currRegisterInfo = this.registerInfo.asObservable();
 
-  updateInfoList(
-    newInfoList: Array<{
-      ownerName: string;
-      licensePlate: string;
-      carType: number;
-      regDateTime: Date;
-    }>
-  ) {
+  updateInfoList(newInfoList: Array<Registerinfo>) {
     this.registerInfo.next(newInfoList);
     localStorage.setItem('regInfo', JSON.stringify(newInfoList));
   }
