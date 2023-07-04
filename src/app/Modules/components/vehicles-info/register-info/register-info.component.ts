@@ -1,15 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 
-import { registerVehiclesService } from 'src/app/services/register-vehicles.service';
-import { parkingRevenueService } from 'src/app/services/parking-revenue.service';
-import { vehicleFeeService } from 'src/app/services/vehicles-fee.service';
+import { registerVehiclesService } from 'src/app/Modules/services/register-vehicles.service';
+import { parkingRevenueService } from 'src/app/Modules/services/parking-revenue.service';
+import { vehicleFeeService } from 'src/app/Modules/services/vehicles-fee.service';
 
 import {
   Parkingrevenue,
   parkingRevenueBaseValue,
-} from '../../interfaces/parkingrevenue';
-import { Vehiclesfee, vehiclesFeeBase } from '../../interfaces/vehiclesfee';
-import { Registerinfo } from '../../interfaces/registerinfo';
+} from 'src/app/Modules/interfaces/parkingrevenue';
+import {
+  Vehiclesfee,
+  vehiclesFeeBase,
+} from 'src/app/Modules/interfaces/vehiclesfee';
+import { Registerinfo } from 'src/app/Modules/interfaces/registerinfo';
+
+import { calculateFee } from '../../helpers/calculate-fee.helper';
 
 @Component({
   selector: 'app-register-info',
@@ -21,6 +26,8 @@ export class RegisterInfoComponent implements OnInit {
 
   vehiclesStatics: Parkingrevenue = parkingRevenueBaseValue;
   vehiclesFee: Vehiclesfee = vehiclesFeeBase;
+
+  searchText: string = '';
 
   constructor(
     private registerService: registerVehiclesService,
@@ -38,21 +45,11 @@ export class RegisterInfoComponent implements OnInit {
         this.regList = list;
 
         this.regList.forEach((info, index) => {
-          let fee: number = 0;
-          let currentDate: Date = new Date();
-          let regDate = new Date(info.regDateTime);
-          let dateInUse = currentDate.getDay() - regDate.getDay();
-
-          if (dateInUse < 0) dateInUse = 0;
-
-          if (info.carType.toString() === '0') {
-            fee = (dateInUse + 1) * this.vehiclesFee.fseated;
-          } else if (info.carType.toString() === '1') {
-            fee = (dateInUse + 1) * this.vehiclesFee.sseated;
-          } else if (info.carType.toString() === '2') {
-            fee = (dateInUse + 1) * this.vehiclesFee.truck;
-          }
-
+          let fee = calculateFee(
+            info.regDateTime,
+            this.vehiclesFee,
+            info.carType
+          );
           this.regList[index].fee = fee;
         });
       }

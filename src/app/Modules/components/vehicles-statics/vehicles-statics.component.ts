@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { parkingRevenueService } from 'src/app/services/parking-revenue.service';
+import { parkingRevenueService } from '../../services/parking-revenue.service';
 import {
   Parkingrevenue,
   parkingRevenueBaseValue,
-} from '../interfaces/parkingrevenue';
+} from '../../interfaces/parkingrevenue';
 
 @Component({
   selector: 'app-vehicles-statics',

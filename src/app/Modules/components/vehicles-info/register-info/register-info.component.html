@@ -1,5 +1,14 @@
+<div class="d-flex justify-content-end">
+  <input
+    type="text"
+    class="form-control mb-3"
+    placeholder="search for license-plate (number only)"
+    [(ngModel)]="searchText"
+    autofocus
+  />
+</div>
 <div
-  *ngFor="let eachInfo of regList; let index = index"
+  *ngFor="let eachInfo of regList | appFilter : searchText; let index = index"
   class="card item-info-card"
 >
   <div class="d-flex justify-content-between">

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { registerVehiclesService } from './services/register-vehicles.service';
+import { registerVehiclesService } from './Modules/services/register-vehicles.service';
 import { Registerinfo } from './Modules/interfaces/registerinfo';
 
 @Component({

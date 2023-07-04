@@ -1,6 +1,6 @@
 import { BehaviorSubject } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { Registerinfo } from '../Modules/interfaces/registerinfo';
+import { Registerinfo } from '../interfaces/registerinfo';
 
 @Injectable()
 export class registerVehiclesService {

@@ -1,9 +1,6 @@
 import { BehaviorSubject } from 'rxjs';
 import { Injectable } from '@angular/core';
-import {
-  Vehiclesfee,
-  vehiclesFeeBase,
-} from '../Modules/interfaces/vehiclesfee';
+import { Vehiclesfee, vehiclesFeeBase } from '../interfaces/vehiclesfee';
 
 @Injectable()
 export class vehicleFeeService {

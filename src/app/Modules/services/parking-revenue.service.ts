@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import {
   Parkingrevenue,
   parkingRevenueBaseValue,
-} from '../Modules/interfaces/parkingrevenue';
+} from '../interfaces/parkingrevenue';
 
 @Injectable()
 export class parkingRevenueService {

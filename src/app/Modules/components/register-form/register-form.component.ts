@@ -1,19 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
-import { vehicleFeeService } from 'src/app/services/vehicles-fee.service';
-import { registerVehiclesService } from 'src/app/services/register-vehicles.service';
-import { parkingRevenueService } from 'src/app/services/parking-revenue.service';
+import { vehicleFeeService } from '../../services/vehicles-fee.service';
+import { registerVehiclesService } from '../../services/register-vehicles.service';
+import { parkingRevenueService } from '../../services/parking-revenue.service';
 
 import { FormBuilder, Validators } from '@angular/forms';
-import { noSpace } from '../validations/no-space.validator';
+import { noSpace } from '../../validations/no-space.validator';
+import { checkExistVehicle } from '../../validations/dup-register.validator';
 
-import { Registerinfo } from '../interfaces/registerinfo';
-import { Vehiclesfee, vehiclesFeeBase } from '../interfaces/vehiclesfee';
+import { Registerinfo } from '../../interfaces/registerinfo';
+import { Vehiclesfee, vehiclesFeeBase } from '../../interfaces/vehiclesfee';
 import {
   Parkingrevenue,
   parkingRevenueBaseValue,
-} from '../interfaces/parkingrevenue';
+} from '../../interfaces/parkingrevenue';
+
+import { calculateFee } from '../helpers/calculate-fee.helper';
 
 @Component({
   selector: 'app-register-form',
@@ -97,29 +100,43 @@ export class RegisterFormComponent implements OnInit {
   }
 
   closePopup() {
-    console.log('hello');
     this.displayEditFee = 'none';
   }
 
   submitEditFeeHandler(f: NgForm) {
-    console.log(f.value);
-
     this.vehicleService.updateVehicleFee(f.value);
+
+    let newRegList = this.regList;
+    newRegList.forEach((reg, id) => {
+      let fee = calculateFee(reg.regDateTime, this.feeService, reg.carType);
+
+      newRegList[id].fee = fee;
+    });
+
+    this.registerService.updateInfoList(newRegList);
 
     this.closePopup();
   }
 
   submitRegFormHandler(f: NgForm) {
-    if (f.value.carType.toString() === '0') {
-      this.vehiclesStatics.fseated.in += 1;
-    } else if (f.value.carType.toString() === '1') {
-      this.vehiclesStatics.sseated.in += 1;
-    } else if (f.value.carType.toString() === '2') {
-      this.vehiclesStatics.truck.in += 1;
-    }
+    let isExisted = checkExistVehicle(f.value.licensePlate, this.regList);
 
-    this.parkingService.updateVehicleStatics(this.vehiclesStatics);
-    this.registerService.updateInfoList([f.value, ...this.regList]);
+    if (isExisted) {
+      alert(
+        'The license is already registered to the system, please try again'
+      );
+    } else {
+      if (f.value.carType.toString() === '0') {
+        this.vehiclesStatics.fseated.in += 1;
+      } else if (f.value.carType.toString() === '1') {
+        this.vehiclesStatics.sseated.in += 1;
+      } else if (f.value.carType.toString() === '2') {
+        this.vehiclesStatics.truck.in += 1;
+      }
+
+      this.parkingService.updateVehicleStatics(this.vehiclesStatics);
+      this.registerService.updateInfoList([f.value, ...this.regList]);
+    }
 
     f.reset();
   }
