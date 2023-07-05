@@ -1,4 +1,4 @@
-import { Vehiclesfee } from '../../interfaces/vehiclesfee';
+import { Vehiclesfee } from '../interfaces/vehiclesfee';
 
 export const calculateFee = (
   regDate: Date,

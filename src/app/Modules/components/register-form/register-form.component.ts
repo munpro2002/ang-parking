@@ -16,7 +16,7 @@ import {
   parkingRevenueBaseValue,
 } from '../../interfaces/parkingrevenue';
 
-import { calculateFee } from '../helpers/calculate-fee.helper';
+import { calculateFee } from '../../helpers/calculate-fee.helper';
 
 @Component({
   selector: 'app-register-form',

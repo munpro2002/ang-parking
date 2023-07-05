@@ -15,6 +15,8 @@ export class parkingRevenueService {
   currVehicleStatics = this.vehiclesStatics.asObservable();
 
   updateVehicleStatics(newStatics: Parkingrevenue) {
+    console.log(newStatics);
+
     this.vehiclesStatics.next(newStatics);
     localStorage.setItem('vehiclesStatics', JSON.stringify(newStatics));
   }

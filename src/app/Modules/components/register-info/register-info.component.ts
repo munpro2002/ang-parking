@@ -14,7 +14,7 @@ import {
 } from 'src/app/Modules/interfaces/vehiclesfee';
 import { Registerinfo } from 'src/app/Modules/interfaces/registerinfo';
 
-import { calculateFee } from '../helpers/calculate-fee.helper';
+import { calculateFee } from '../../helpers/calculate-fee.helper';
 
 @Component({
   selector: 'app-register-info',
@@ -62,22 +62,23 @@ export class RegisterInfoComponent implements OnInit {
 
   deleteInfoHandler(id: number) {
     let newRegList = this.regList.filter((item, index) => index !== id);
+    let newVehiclesStatics = this.vehiclesStatics;
 
     if (this.regList[id].carType.toString() === '0') {
-      this.vehiclesStatics.fseated.in -= 1;
-      this.vehiclesStatics.fseated.out += 1;
-      this.vehiclesStatics.fseated.revenue += this.regList[id].fee || 0;
+      newVehiclesStatics.fseated.in -= 1;
+      newVehiclesStatics.fseated.out += 1;
+      newVehiclesStatics.fseated.revenue += this.regList[id].fee || 0;
     } else if (this.regList[id].carType.toString() === '1') {
-      this.vehiclesStatics.sseated.in -= 1;
-      this.vehiclesStatics.sseated.out += 1;
-      this.vehiclesStatics.sseated.revenue += this.regList[id].fee || 0;
+      newVehiclesStatics.sseated.in -= 1;
+      newVehiclesStatics.sseated.out += 1;
+      newVehiclesStatics.sseated.revenue += this.regList[id].fee || 0;
     } else if (this.regList[id].carType.toString() === '2') {
-      this.vehiclesStatics.truck.in -= 1;
-      this.vehiclesStatics.truck.out += 1;
-      this.vehiclesStatics.truck.revenue += this.regList[id].fee || 0;
+      newVehiclesStatics.truck.in -= 1;
+      newVehiclesStatics.truck.out += 1;
+      newVehiclesStatics.truck.revenue += this.regList[id].fee || 0;
     }
 
-    this.parkingService.updateVehicleStatics(this.vehiclesStatics);
+    this.parkingService.updateVehicleStatics(newVehiclesStatics);
     this.registerService.updateInfoList(newRegList);
   }
 }

@@ -5,7 +5,7 @@ import { AppModule } from './app/app.module';
 import { registerLicense } from '@syncfusion/ej2-base';
 
 registerLicense(
-  'Ngo9BigBOggjHTQxAR8/V1NGaF5cXmdCeUxwWmFZfV1gcF9CZ1ZRQmYuP1ZhSXxQdkNhUH9adHNVQGdZVUE='
+  'ORg4AjUWIQA/Gnt2V1hhQlJAfVddXnxLflF1VWJYdV51flFHcDwsT3RfQF5jTn5XdEZjXn9Yc3xURQ=='
 );
 
 platformBrowserDynamic()
