@@ -24,8 +24,6 @@ import { calculateFee } from '../../helpers/calculate-fee.helper';
   styleUrls: ['./register-form.component.scss'],
 })
 export class RegisterFormComponent implements OnInit {
-  todayTime = new Date();
-
   regForm: any;
   editFeeForm: any;
 

@@ -134,13 +134,16 @@
           Please select vehicle type
         </option>
         <option [value]="0">
-          Type: 4 Seated, Fee: {{ feeService.fseated | currency }}/day
+          Type: 4 Seated, Fee:
+          {{ feeService.fseated | currency : "USD" : "symbol" : "1.0-0" }}/day
         </option>
         <option [value]="1">
-          Type: 7 Seated, Fee: {{ feeService.sseated | currency }}/day
+          Type: 7 Seated, Fee:
+          {{ feeService.sseated | currency : "USD" : "symbol" : "1.0-0" }}/day
         </option>
         <option [value]="2">
-          Type: Truck, Fee: {{ feeService.truck | currency }}/day
+          Type: Truck, Fee:
+          {{ feeService.truck | currency : "USD" : "symbol" : "1.0-0" }}/day
         </option>
       </select>
       <div
@@ -155,10 +158,7 @@
 
     <div class="form-group">
       <label>Register Time</label>
-      <ejs-datetimepicker
-        [min]="todayTime"
-        formControlName="regDateTime"
-      ></ejs-datetimepicker>
+      <ejs-datetimepicker formControlName="regDateTime"></ejs-datetimepicker>
       <div
         class="alert alert-danger"
         *ngIf="regDateTime.touched && regDateTime.invalid"
