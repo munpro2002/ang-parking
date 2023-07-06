@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import { vehicleFeeService } from '../../services/vehicles-fee.service';
 import { registerVehiclesService } from '../../services/register-vehicles.service';
 import { parkingRevenueService } from '../../services/parking-revenue.service';
+import { ToastrService } from 'ngx-toastr';
 
 import { FormBuilder, Validators } from '@angular/forms';
 import { noSpace } from '../../validations/no-space.validator';
@@ -39,7 +40,8 @@ export class RegisterFormComponent implements OnInit {
     fb: FormBuilder,
     private registerService: registerVehiclesService,
     private parkingService: parkingRevenueService,
-    private vehicleService: vehicleFeeService
+    private vehicleService: vehicleFeeService,
+    private toastr: ToastrService
   ) {
     this.regForm = fb.group({
       ownerName: [
@@ -113,6 +115,13 @@ export class RegisterFormComponent implements OnInit {
 
     this.registerService.updateInfoList(newRegList);
 
+    this.toastr.success('Successfully add new record', 'BRAVO', {
+      closeButton: true,
+      progressBar: true,
+      timeOut: 3000,
+      toastClass: 'ngx-toastr ngx-toastr--success',
+    });
+
     this.closePopup();
   }
 
@@ -120,9 +129,11 @@ export class RegisterFormComponent implements OnInit {
     let isExisted = checkExistVehicle(f.value.licensePlate, this.regList);
 
     if (isExisted) {
-      alert(
-        'The license is already registered to the system, please try again'
-      );
+      this.toastr.error('The license was already registered', 'ERROR', {
+        closeButton: true,
+        progressBar: true,
+        timeOut: 3000,
+      });
     } else {
       if (f.value.carType.toString() === '0') {
         this.vehiclesStatics.fseated.in += 1;
@@ -134,6 +145,12 @@ export class RegisterFormComponent implements OnInit {
 
       this.parkingService.updateVehicleStatics(this.vehiclesStatics);
       this.registerService.updateInfoList([f.value, ...this.regList]);
+      this.toastr.success('Successfully add new record', 'BRAVO', {
+        closeButton: true,
+        progressBar: true,
+        timeOut: 3000,
+        toastClass: 'ngx-toastr ngx-toastr--success',
+      });
     }
 
     f.reset();

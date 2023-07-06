@@ -6,7 +6,13 @@
 @import "../node_modules/@syncfusion/ej2-splitbuttons/styles/material.css";
 @import "../node_modules/@syncfusion/ej2-calendars/styles/material.css";
 @import "../node_modules/@syncfusion/ej2-angular-calendars/styles/material.css";
+@import "ngx-toastr/toastr";
 
 html {
   font-family: monospace;
+}
+
+.ngx-toastr--success {
+  font-weight: 600;
+  background-color: #14c38e;
 }

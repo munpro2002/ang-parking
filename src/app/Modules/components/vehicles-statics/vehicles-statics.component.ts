@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { parkingRevenueService } from '../../services/parking-revenue.service';
 import { registerVehiclesService } from '../../services/register-vehicles.service';
+import { ToastrService } from 'ngx-toastr';
 
 import { Registerinfo } from '../../interfaces/registerinfo';
 import {
@@ -19,7 +20,8 @@ export class VehiclesStaticsComponent implements OnInit {
 
   constructor(
     private parkingService: parkingRevenueService,
-    private registerService: registerVehiclesService
+    private registerService: registerVehiclesService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit() {
@@ -55,5 +57,11 @@ export class VehiclesStaticsComponent implements OnInit {
 
     this.parkingService.updateVehicleStatics(resetValue);
     this.registerService.updateInfoList([]);
+
+    this.toastr.warning('You just have deleted all records', 'Warning', {
+      closeButton: true,
+      progressBar: true,
+      timeOut: 3000,
+    });
   }
 }

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { registerVehiclesService } from 'src/app/Modules/services/register-vehicles.service';
 import { parkingRevenueService } from 'src/app/Modules/services/parking-revenue.service';
 import { vehicleFeeService } from 'src/app/Modules/services/vehicles-fee.service';
+import { ToastrService } from 'ngx-toastr';
 
 import {
   Parkingrevenue,
@@ -32,7 +33,8 @@ export class RegisterInfoComponent implements OnInit {
   constructor(
     private registerService: registerVehiclesService,
     private parkingService: parkingRevenueService,
-    private feeService: vehicleFeeService
+    private feeService: vehicleFeeService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit() {
@@ -80,5 +82,11 @@ export class RegisterInfoComponent implements OnInit {
 
     this.parkingService.updateVehicleStatics(newVehiclesStatics);
     this.registerService.updateInfoList(newRegList);
+
+    this.toastr.info('You just have deleted one record', 'NOTE', {
+      closeButton: true,
+      progressBar: true,
+      timeOut: 3000,
+    });
   }
 }

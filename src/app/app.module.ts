@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DateTimePickerModule } from '@syncfusion/ej2-angular-calendars';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 import { registerVehiclesService } from './Modules/services/register-vehicles.service';
 import { vehicleFeeService } from './Modules/services/vehicles-fee.service';
@@ -27,6 +29,8 @@ import { VehiclesStaticsComponent } from './Modules/components/vehicles-statics/
     FormsModule,
     ReactiveFormsModule,
     DateTimePickerModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ],
   providers: [
     registerVehiclesService,
