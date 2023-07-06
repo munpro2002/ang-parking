@@ -8,7 +8,9 @@ export const calculateFee = (
   let fee: number = 0;
   let currentDate: Date = new Date();
   regDate = new Date(regDate);
-  let dateInUse = currentDate.getDay() - regDate.getDay();
+  let dateInUse = Math.floor(
+    (currentDate.getTime() - regDate.getTime()) / (24 * 3600 * 1000)
+  );
 
   if (dateInUse < 0) dateInUse = 0;
 
