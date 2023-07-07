@@ -139,8 +139,6 @@ export class RegisterFormComponent implements OnInit {
   submitRegFormHandler(f: NgForm) {
     let isExisted = checkExistVehicle(f.value.licensePlate, this.regList);
 
-    console.log(f.value, this.vehiclesStatics);
-
     if (isExisted) {
       this.toastr.error('The license was already registered', 'ERROR', {
         closeButton: true,
