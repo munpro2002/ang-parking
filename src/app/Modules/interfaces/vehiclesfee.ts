@@ -1,11 +1,15 @@
 export interface Vehiclesfee {
-  fseated: number;
-  sseated: number;
+  fseater: number;
+  sseater: number;
   truck: number;
+  oilChange: number;
+  carWash: number;
 }
 
-export const vehiclesFeeBase: Vehiclesfee = {
-  fseated: 4,
-  sseated: 5,
+export const FEE_BASE_VALUE: Vehiclesfee = {
+  fseater: 4,
+  sseater: 5,
   truck: 7,
+  oilChange: 10,
+  carWash: 10,
 };

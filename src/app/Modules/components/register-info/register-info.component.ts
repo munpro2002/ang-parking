@@ -7,11 +7,11 @@ import { ToastrService } from 'ngx-toastr';
 
 import {
   Parkingrevenue,
-  parkingRevenueBaseValue,
+  STATICS_BASE_VALUE,
 } from 'src/app/Modules/interfaces/parkingrevenue';
 import {
   Vehiclesfee,
-  vehiclesFeeBase,
+  FEE_BASE_VALUE,
 } from 'src/app/Modules/interfaces/vehiclesfee';
 import { Registerinfo } from 'src/app/Modules/interfaces/registerinfo';
 
@@ -25,8 +25,8 @@ import { calculateFee } from '../../helpers/calculate-fee.helper';
 export class RegisterInfoComponent implements OnInit {
   regList: Array<Registerinfo> = [];
 
-  vehiclesStatics: Parkingrevenue = parkingRevenueBaseValue;
-  vehiclesFee: Vehiclesfee = vehiclesFeeBase;
+  vehiclesStatics: Parkingrevenue = STATICS_BASE_VALUE;
+  vehiclesFee: Vehiclesfee = FEE_BASE_VALUE;
 
   searchText: string = '';
 
@@ -47,11 +47,7 @@ export class RegisterInfoComponent implements OnInit {
         this.regList = list;
 
         this.regList.forEach((info, index) => {
-          let fee = calculateFee(
-            info.regDateTime,
-            this.vehiclesFee,
-            info.carType
-          );
+          let fee = calculateFee(info, this.vehiclesFee);
           this.regList[index].fee = fee;
         });
       }
@@ -67,13 +63,13 @@ export class RegisterInfoComponent implements OnInit {
     let newVehiclesStatics = this.vehiclesStatics;
 
     if (this.regList[id].carType.toString() === '0') {
-      newVehiclesStatics.fseated.in -= 1;
-      newVehiclesStatics.fseated.out += 1;
-      newVehiclesStatics.fseated.revenue += this.regList[id].fee || 0;
+      newVehiclesStatics.fseater.in -= 1;
+      newVehiclesStatics.fseater.out += 1;
+      newVehiclesStatics.fseater.revenue += this.regList[id].fee || 0;
     } else if (this.regList[id].carType.toString() === '1') {
-      newVehiclesStatics.sseated.in -= 1;
-      newVehiclesStatics.sseated.out += 1;
-      newVehiclesStatics.sseated.revenue += this.regList[id].fee || 0;
+      newVehiclesStatics.sseater.in -= 1;
+      newVehiclesStatics.sseater.out += 1;
+      newVehiclesStatics.sseater.revenue += this.regList[id].fee || 0;
     } else if (this.regList[id].carType.toString() === '2') {
       newVehiclesStatics.truck.in -= 1;
       newVehiclesStatics.truck.out += 1;

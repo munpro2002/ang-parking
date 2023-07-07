@@ -32,6 +32,16 @@
     <span class="font-weight-bold">Vehicle Type:</span> truck
   </div>
   <div>
+    <span class="font-weight-bold">Other Service:</span>
+    {{ " "
+    }}<span
+      *ngIf="!eachInfo.otherService.oilChange && !eachInfo.otherService.carWash"
+      >None</span
+    >
+    {{ " " }}<span *ngIf="eachInfo.otherService.oilChange">Oil Change</span>
+    {{ " " }}<span *ngIf="eachInfo.otherService.carWash">Car Wash</span>
+  </div>
+  <div>
     <span class="font-weight-bold">Register Time:</span>
     {{ eachInfo.regDateTime | date : "medium" }}
   </div>

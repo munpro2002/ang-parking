@@ -1,10 +1,10 @@
 export interface Parkingrevenue {
-  fseated: {
+  fseater: {
     in: number;
     out: number;
     revenue: number;
   };
-  sseated: {
+  sseater: {
     in: number;
     out: number;
     revenue: number;
@@ -16,13 +16,13 @@ export interface Parkingrevenue {
   };
 }
 
-export const parkingRevenueBaseValue: Parkingrevenue = {
-  fseated: {
+export const STATICS_BASE_VALUE: Parkingrevenue = {
+  fseater: {
     in: 0,
     out: 0,
     revenue: 0,
   },
-  sseated: {
+  sseater: {
     in: 0,
     out: 0,
     revenue: 0,

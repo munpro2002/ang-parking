@@ -1,7 +1,8 @@
 <div class="rounded px-3 py-4 border">
   <form [formGroup]="regForm" (submit)="submitRegFormHandler(regForm)">
+    <!-- Name Input -->
     <div class="form-group">
-      <label> Car Owner </label>
+      <label> Car Owner: </label>
       <input
         type="text"
         class="form-control"
@@ -23,8 +24,9 @@
       </div>
     </div>
 
+    <!-- License Input -->
     <div class="form-group">
-      <label> Liscense Plates </label>
+      <label> Liscense Plates: </label>
       <input
         type="text"
         class="form-control"
@@ -51,9 +53,10 @@
       </div>
     </div>
 
+    <!-- Select car type input and edit fee group-->
     <div class="form-group">
       <label>
-        <span>Car Type</span>
+        <span>Car Type:</span>
         <i
           (click)="openPopup()"
           class="bi bi-pencil-square text-dark ml-1"
@@ -79,7 +82,7 @@
                   class="form-control"
                   placeholder="Enter a fee"
                   type="number"
-                  formControlName="fseated"
+                  formControlName="fseater"
                   min="1"
                 />
               </div>
@@ -89,7 +92,7 @@
                   class="form-control"
                   placeholder="Enter a fee"
                   type="number"
-                  formControlName="sseated"
+                  formControlName="sseater"
                   min="1"
                 />
               </div>
@@ -124,6 +127,7 @@
         </div>
       </div>
 
+      <!-- Select input -->
       <select
         formControlName="carType"
         required
@@ -134,12 +138,12 @@
           Please select vehicle type
         </option>
         <option [value]="0">
-          Type: 4 Seated, Fee:
-          {{ feeService.fseated | currency : "USD" : "symbol" : "1.0-0" }}/day
+          Type: 4 Seater, Fee:
+          {{ feeService.fseater | currency : "USD" : "symbol" : "1.0-0" }}/day
         </option>
         <option [value]="1">
-          Type: 7 Seated, Fee:
-          {{ feeService.sseated | currency : "USD" : "symbol" : "1.0-0" }}/day
+          Type: 7 Seater, Fee:
+          {{ feeService.sseater | currency : "USD" : "symbol" : "1.0-0" }}/day
         </option>
         <option [value]="2">
           Type: Truck, Fee:
@@ -156,8 +160,26 @@
       </div>
     </div>
 
+    <!-- Other service used input -->
+    <div class="form-group" formGroupName="otherService">
+      <label>Other Service (Optional):</label>
+      <div class="d-flex">
+        <div class="form-control mr-1 d-flex align-items-center">
+          <input class="mr-1" type="checkbox" formControlName="oilChange" />
+          Oil Change, fee:
+          {{ feeService.oilChange | currency : "USD" : "symbol" : "1.0-0" }}
+        </div>
+        <div class="form-control ml-1 d-flex align-items-center">
+          <input class="mr-1" type="checkbox" formControlName="carWash" />
+          Car Wash, fee:
+          {{ feeService.oilChange | currency : "USD" : "symbol" : "1.0-0" }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Register time input -->
     <div class="form-group">
-      <label>Register Time</label>
+      <label>Register Time:</label>
       <ejs-datetimepicker formControlName="regDateTime"></ejs-datetimepicker>
       <div
         class="alert alert-danger"

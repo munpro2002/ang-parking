@@ -11,10 +11,10 @@ import { noSpace } from '../../validations/no-space.validator';
 import { checkExistVehicle } from '../../validations/dup-register.validator';
 
 import { Registerinfo } from '../../interfaces/registerinfo';
-import { Vehiclesfee, vehiclesFeeBase } from '../../interfaces/vehiclesfee';
+import { Vehiclesfee, FEE_BASE_VALUE } from '../../interfaces/vehiclesfee';
 import {
   Parkingrevenue,
-  parkingRevenueBaseValue,
+  STATICS_BASE_VALUE,
 } from '../../interfaces/parkingrevenue';
 
 import { calculateFee } from '../../helpers/calculate-fee.helper';
@@ -32,9 +32,9 @@ export class RegisterFormComponent implements OnInit {
   letterRegex: string = '[a-zA-Z ]+';
   displayEditFee: string = 'none';
 
-  feeService: Vehiclesfee = vehiclesFeeBase;
+  feeService: Vehiclesfee = FEE_BASE_VALUE;
   regList: Array<Registerinfo> = [];
-  vehiclesStatics: Parkingrevenue = parkingRevenueBaseValue;
+  vehiclesStatics: Parkingrevenue = STATICS_BASE_VALUE;
 
   constructor(
     fb: FormBuilder,
@@ -57,12 +57,16 @@ export class RegisterFormComponent implements OnInit {
         ],
       ],
       carType: ['', Validators.required],
+      otherService: fb.group({
+        oilChange: [false],
+        carWash: [false],
+      }),
       regDateTime: ['', Validators.required],
     });
 
     this.editFeeForm = fb.group({
-      fseated: ['', Validators.required],
-      sseated: ['', Validators.required],
+      fseater: ['', Validators.required],
+      sseater: ['', Validators.required],
       truck: ['', Validators.required],
     });
   }
@@ -95,6 +99,10 @@ export class RegisterFormComponent implements OnInit {
     return this.regForm.get('regDateTime');
   }
 
+  get otherService() {
+    return this.regForm.get('otherService');
+  }
+
   openPopup() {
     this.displayEditFee = 'block';
   }
@@ -104,22 +112,25 @@ export class RegisterFormComponent implements OnInit {
   }
 
   submitEditFeeHandler(f: NgForm) {
-    this.vehicleService.updateVehicleFee(f.value);
+    this.vehicleService.updateVehicleFee({
+      ...f.value,
+      oilChange: 10,
+      carWash: 10,
+    });
 
     let newRegList = this.regList;
     newRegList.forEach((reg, id) => {
-      let fee = calculateFee(reg.regDateTime, this.feeService, reg.carType);
+      let fee = calculateFee(reg, this.feeService);
 
       newRegList[id].fee = fee;
     });
 
     this.registerService.updateInfoList(newRegList);
 
-    this.toastr.success('Successfully add new record', 'BRAVO', {
+    this.toastr.info('You just have edited parking fee', 'NOTE', {
       closeButton: true,
       progressBar: true,
       timeOut: 3000,
-      toastClass: 'ngx-toastr ngx-toastr--success',
     });
 
     this.closePopup();
@@ -127,6 +138,8 @@ export class RegisterFormComponent implements OnInit {
 
   submitRegFormHandler(f: NgForm) {
     let isExisted = checkExistVehicle(f.value.licensePlate, this.regList);
+
+    console.log(f.value, this.vehiclesStatics);
 
     if (isExisted) {
       this.toastr.error('The license was already registered', 'ERROR', {
@@ -136,9 +149,9 @@ export class RegisterFormComponent implements OnInit {
       });
     } else {
       if (f.value.carType.toString() === '0') {
-        this.vehiclesStatics.fseated.in += 1;
+        this.vehiclesStatics.fseater.in += 1;
       } else if (f.value.carType.toString() === '1') {
-        this.vehiclesStatics.sseated.in += 1;
+        this.vehiclesStatics.sseater.in += 1;
       } else if (f.value.carType.toString() === '2') {
         this.vehiclesStatics.truck.in += 1;
       }

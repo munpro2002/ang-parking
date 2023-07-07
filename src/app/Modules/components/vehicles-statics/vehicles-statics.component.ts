@@ -6,7 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Registerinfo } from '../../interfaces/registerinfo';
 import {
   Parkingrevenue,
-  parkingRevenueBaseValue,
+  STATICS_BASE_VALUE,
 } from '../../interfaces/parkingrevenue';
 
 @Component({
@@ -15,7 +15,7 @@ import {
   styleUrls: ['./vehicles-statics.component.scss'],
 })
 export class VehiclesStaticsComponent implements OnInit {
-  dataStatics: Parkingrevenue = parkingRevenueBaseValue;
+  dataStatics: Parkingrevenue = STATICS_BASE_VALUE;
   regList: Array<Registerinfo> = [];
 
   constructor(
@@ -38,12 +38,12 @@ export class VehiclesStaticsComponent implements OnInit {
 
   clearStaticsHandler() {
     let resetValue = {
-      fseated: {
+      fseater: {
         in: 0,
         out: 0,
         revenue: 0,
       },
-      sseated: {
+      sseater: {
         in: 0,
         out: 0,
         revenue: 0,

@@ -11,6 +11,7 @@ export class registerVehiclesService {
   currRegisterInfo = this.registerInfo.asObservable();
 
   updateInfoList(newInfoList: Array<Registerinfo>) {
+    console.log(newInfoList);
     this.registerInfo.next(newInfoList);
     localStorage.setItem('regInfo', JSON.stringify(newInfoList));
   }

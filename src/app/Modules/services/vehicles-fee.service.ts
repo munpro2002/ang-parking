@@ -1,11 +1,11 @@
 import { BehaviorSubject } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { Vehiclesfee, vehiclesFeeBase } from '../interfaces/vehiclesfee';
+import { Vehiclesfee, FEE_BASE_VALUE } from '../interfaces/vehiclesfee';
 
 @Injectable()
 export class vehicleFeeService {
   private vehiclesFee = new BehaviorSubject(
-    JSON.parse(localStorage.getItem('fee')!) || vehiclesFeeBase
+    JSON.parse(localStorage.getItem('fee')!) || FEE_BASE_VALUE
   );
 
   curVehiclesFee = this.vehiclesFee.asObservable();

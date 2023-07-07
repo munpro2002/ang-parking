@@ -15,16 +15,16 @@
         <tr>
           <th scope="row">1</th>
           <td>4 Seated</td>
-          <td>{{ dataStatics.fseated.in }}</td>
-          <td>{{ dataStatics.fseated.out }}</td>
-          <td>{{ dataStatics.fseated.revenue | currency }}</td>
+          <td>{{ dataStatics.fseater.in }}</td>
+          <td>{{ dataStatics.fseater.out }}</td>
+          <td>{{ dataStatics.fseater.revenue | currency }}</td>
         </tr>
         <tr>
           <th scope="row">2</th>
           <td>7 Seated</td>
-          <td>{{ dataStatics.sseated.in }}</td>
-          <td>{{ dataStatics.sseated.out }}</td>
-          <td>{{ dataStatics.sseated.revenue | currency }}</td>
+          <td>{{ dataStatics.sseater.in }}</td>
+          <td>{{ dataStatics.sseater.out }}</td>
+          <td>{{ dataStatics.sseater.revenue | currency }}</td>
         </tr>
         <tr>
           <th scope="row">3</th>
@@ -39,22 +39,22 @@
           <td class="text-white">
             {{
               dataStatics.truck.in +
-                dataStatics.sseated.in +
-                dataStatics.fseated.in
+                dataStatics.sseater.in +
+                dataStatics.fseater.in
             }}
           </td>
           <td class="text-white">
             {{
               dataStatics.truck.out +
-                dataStatics.sseated.out +
-                dataStatics.fseated.out
+                dataStatics.sseater.out +
+                dataStatics.fseater.out
             }}
           </td>
           <td class="text-white">
             {{
               dataStatics.truck.revenue +
-                dataStatics.sseated.revenue +
-                dataStatics.fseated.revenue | currency
+                dataStatics.sseater.revenue +
+                dataStatics.fseater.revenue | currency
             }}
           </td>
         </tr>
